@@ -11,6 +11,7 @@
 
 @interface LBViewController : UIViewController <LBYouTubePlayerControllerDelegate> {
     LBYouTubePlayerViewController* controller;
+    IBOutlet UIActivityIndicatorView *activityView;
 }
 
 @property (nonatomic, strong) LBYouTubePlayerViewController* controller;

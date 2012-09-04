@@ -20,23 +20,38 @@
 -(void)viewDidLoad {
     [super viewDidLoad];
 	
+}
+
+
+-(IBAction)buttonPressed:(id)sender {
+    [activityView startAnimating];
     self.controller = [[LBYouTubePlayerViewController alloc] initWithYouTubeURL:[NSURL URLWithString:@"https://www.youtube.com/watch?v=u1zgFlCw8Aw"]];
     self.controller.delegate = self;
     self.controller.quality = LBYouTubePlayerQualityLarge;
     self.controller.view.frame = CGRectMake(-10.0f, -10.0f, 1.0f, 1.0f);
     self.controller.view.center = self.view.center;
     [self.view addSubview:self.controller.view];
-    //only to test, you sould use notifications!
-    [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(test:) userInfo:nil repeats:NO];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playbackStateChanged) name:MPMoviePlayerPlaybackStateDidChangeNotification object:self.controller.view.controller];
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(exitFullScreen) name:MPMoviePlayerDidExitFullscreenNotification object:self.controller.view.controller];
 }
 
--(void) test:(id) sender {
-    if(self.controller.view.controller.loadState == MPMovieLoadStatePlayable) {
+-(void) exitFullScreen:(NSNotification*)notification {
+    [self.controller.view removeFromSuperview];
+    self.controller = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void) playbackStateChanged {
+    
+    if(self.controller.view.controller.loadState & MPMovieLoadStatePlayable) {
+        [activityView stopAnimating];
         [self.controller.view.controller setFullscreen:YES];
-    } else {
-        [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(test:) userInfo:nil repeats:NO];
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
     }
 }
+
 
 -(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
     return toInterfaceOrientation != UIInterfaceOrientationPortraitUpsideDown;
