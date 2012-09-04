@@ -8,6 +8,7 @@
 
 #import "LBViewController.h"
 #import "LBYouTubePlayerViewController.h"
+#import <AVFoundation/AVFoundation.h>
 
 @implementation LBViewController
 
@@ -19,7 +20,10 @@
 
 -(void)viewDidLoad {
     [super viewDidLoad];
-	
+	NSError *activationError = nil;
+    [[AVAudioSession sharedInstance] setActive: YES error: &activationError];
+    NSError *setCategoryError = nil;
+    [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryPlayback error: &setCategoryError];
 }
 
 
@@ -29,7 +33,7 @@
     self.controller.delegate = self;
     self.controller.quality = LBYouTubePlayerQualityLarge;
     self.controller.view.frame = CGRectMake(-10.0f, -10.0f, 1.0f, 1.0f);
-    self.controller.view.center = self.view.center;
+    //self.controller.view.center = self.view.center;
     [self.view addSubview:self.controller.view];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playbackStateChanged) name:MPMoviePlayerPlaybackStateDidChangeNotification object:self.controller.view.controller];
     
@@ -48,6 +52,7 @@
     if(self.controller.view.controller.loadState & MPMovieLoadStatePlayable) {
         [activityView stopAnimating];
         [self.controller.view.controller setFullscreen:YES];
+        [self.controller.view.controller.
         [[NSNotificationCenter defaultCenter] removeObserver:self];
     }
 }

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		06FD157F1585DAEC00FDCD9E /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 06FD157E1585DAEC00FDCD9E /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		0FEBB44115F629D100B680E7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FEBB44015F629D100B680E7 /* AVFoundation.framework */; };
 		2B16696A15722A920030C509 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B16696915722A920030C509 /* UIKit.framework */; };
 		2B16696C15722A920030C509 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B16696B15722A920030C509 /* Foundation.framework */; };
 		2B16696E15722A920030C509 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B16696D15722A920030C509 /* CoreGraphics.framework */; };
@@ -24,6 +25,7 @@
 /* Begin PBXFileReference section */
 		06FD157D1585DAEC00FDCD9E /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSONKit.h; path = ../Submodules/JSONKit/JSONKit.h; sourceTree = "<group>"; };
 		06FD157E1585DAEC00FDCD9E /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSONKit.m; path = ../Submodules/JSONKit/JSONKit.m; sourceTree = "<group>"; };
+		0FEBB44015F629D100B680E7 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		2B16696515722A920030C509 /* LBYouTubeView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LBYouTubeView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B16696915722A920030C509 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2B16696B15722A920030C509 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -49,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0FEBB44115F629D100B680E7 /* AVFoundation.framework in Frameworks */,
 				2B16698A15722AC60030C509 /* MediaPlayer.framework in Frameworks */,
 				2B16696A15722A920030C509 /* UIKit.framework in Frameworks */,
 				2B16696C15722A920030C509 /* Foundation.framework in Frameworks */,
@@ -71,6 +74,7 @@
 		2B16695A15722A920030C509 = {
 			isa = PBXGroup;
 			children = (
+				0FEBB44015F629D100B680E7 /* AVFoundation.framework */,
 				06FD157C1585DAD800FDCD9E /* Dependencies */,
 				2BCF805B15A0ABAB0053A1C6 /* LBYouTubePlayerController */,
 				2B16696F15722A920030C509 /* LBYouTubeView Sample */,
