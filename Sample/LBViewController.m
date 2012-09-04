@@ -20,12 +20,22 @@
 -(void)viewDidLoad {
     [super viewDidLoad];
 	
-    self.controller = [[LBYouTubePlayerViewController alloc] initWithYouTubeURL:[NSURL URLWithString:@"http://www.youtube.com/watch?v=1fTIhC1WSew&list=FLEYfH4kbq85W_CiOTuSjf8w&feature=mh_lolz"]];
+    self.controller = [[LBYouTubePlayerViewController alloc] initWithYouTubeURL:[NSURL URLWithString:@"https://www.youtube.com/watch?v=u1zgFlCw8Aw"]];
     self.controller.delegate = self;
     self.controller.quality = LBYouTubePlayerQualityLarge;
-    self.controller.view.frame = CGRectMake(0.0f, 0.0f, 200.0f, 200.0f);
+    self.controller.view.frame = CGRectMake(-10.0f, -10.0f, 1.0f, 1.0f);
     self.controller.view.center = self.view.center;
     [self.view addSubview:self.controller.view];
+    //only to test, you sould use notifications!
+    [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(test:) userInfo:nil repeats:NO];
+}
+
+-(void) test:(id) sender {
+    if(self.controller.view.controller.loadState == MPMovieLoadStatePlayable) {
+        [self.controller.view.controller setFullscreen:YES];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(test:) userInfo:nil repeats:NO];
+    }
 }
 
 -(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
@@ -37,6 +47,7 @@
 
 -(void)youTubePlayerViewController:(LBYouTubePlayerViewController *)controller didSuccessfullyExtractYouTubeURL:(NSURL *)videoURL {
     NSLog(@"Did extract video source:%@", videoURL);
+    
 }
 
 -(void)youTubePlayerViewController:(LBYouTubePlayerViewController *)controller failedExtractingYouTubeURLWithError:(NSError *)error {
