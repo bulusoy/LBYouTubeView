@@ -7,17 +7,20 @@
 //
 
 #import "LBYouTubePlayerController.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface LBYouTubePlayerController () 
 
-@property (nonatomic, strong) MPMoviePlayerController* controller;
+@property (nonatomic, strong) AVPlayer* player;
+@property (nonatomic, strong) AVPlayerLayer* playerLayer;
 
 -(void)_setup;
 
 @end
 @implementation LBYouTubePlayerController
 
-@synthesize controller;
+@synthesize player;
+@synthesize playerLayer;
 
 #pragma mark Initialization
 
@@ -46,24 +49,35 @@
 }
 
 -(void)_setup {
+    self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.backgroundColor = [UIColor blackColor];
 }
 
 #pragma mark -
 #pragma mark Other Methods
 
+-(void) layoutSubviews {
+    [super layoutSubviews];
+    self.playerLayer.frame = self.bounds;
+}
+
 -(void)loadYouTubeVideo:(NSURL *)URL {
-    if (self.controller) {
-        [self.controller.view removeFromSuperview];
+    if (self.player) {
+        [self.playerLayer removeFromSuperlayer];
     }
     
-    self.controller = [[MPMoviePlayerController alloc] initWithContentURL:URL];
-    [self.controller prepareToPlay];
-    self.controller.useApplicationAudioSession = NO;
-    self.controller.controlStyle = MPMovieControlStyleEmbedded;
-    self.controller.view.frame = self.bounds;
-    self.controller.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    [self addSubview:self.controller.view];
+    self.player = [AVPlayer playerWithURL:URL];
+    self.playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
+    self.playerLayer.frame = self.bounds;
+    [self.layer addSublayer:self.playerLayer];
+    [self.player play];
+//    [self.controller prepareToPlay];
+//    self.controller.shouldAutoplay = YES;
+//    self.controller.useApplicationAudioSession = NO;
+//    self.controller.controlStyle = MPMovieControlStyleEmbedded;
+//    self.controller.view.frame = self.bounds;
+//    self.controller.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+//    [self addSubview:self.controller.view];
 }
 
 #pragma mark -

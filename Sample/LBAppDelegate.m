@@ -7,8 +7,8 @@
 //
 
 #import "LBAppDelegate.h"
-
 #import "LBViewController.h"
+#import <AVFoundation/AVFoundation.h>
 
 @implementation LBAppDelegate
 
@@ -23,6 +23,11 @@
     self.viewController = [[LBViewController alloc] initWithNibName:@"LBViewController" bundle:nil];
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
+    NSError *activationError = nil;
+    [[AVAudioSession sharedInstance] setActive: YES error: &activationError];
+    NSError *setCategoryError = nil;
+    [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryPlayback error: &setCategoryError];
+
     return YES;
 }
 

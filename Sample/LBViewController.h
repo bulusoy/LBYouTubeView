@@ -7,13 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "LBYouTubePlayerViewController.h"
 
-@interface LBViewController : UIViewController <LBYouTubePlayerControllerDelegate> {
-    LBYouTubePlayerViewController* controller;
-    IBOutlet UIActivityIndicatorView *activityView;
+
+@interface LBViewController : UIViewController {
 }
-
-@property (nonatomic, strong) LBYouTubePlayerViewController* controller;
 
 @end
