@@ -13,6 +13,7 @@
 
 @synthesize youtubeURL;
 @synthesize statusBarStyle;
+@synthesize controller;
 
 -(void) _setup {
     //self.controller = [[LBYouTubePlayerViewController alloc] initWithYouTubeURL:self.youtubeURL];
@@ -64,7 +65,11 @@
 #pragma mark Actions
 
 -(void) doneAction:(id)sender {
+	if (self.navigationController != nil) {
     [self dismissModalViewControllerAnimated:YES];
+	} else {
+		[self.view removeFromSuperview];
+	}
 }
 
 #pragma mark -
